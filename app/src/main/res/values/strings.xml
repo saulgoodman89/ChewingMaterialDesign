@@ -1,4 +1,5 @@
 <resources>
+    <string name="shr_app_name">Shrine</string>
     <string name="app_name">ChewingMaterialDesign</string>
     <string name="shr_hint_username">Username</string>
     <string name="shr_hint_password">Password</string>
@@ -19,4 +20,6 @@
     <string name="shr_bottoms_label">Bottoms</string>
     <string name="shr_dresses_label">Dresses</string>
     <string name="shr_account_label">My Account</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
