@@ -7,5 +7,7 @@
     tools:context=".MainActivity"
     android:id="@+id/container">
 
+    <include
+        layout="@layout/shr_product_card" />
 
 </FrameLayout>
