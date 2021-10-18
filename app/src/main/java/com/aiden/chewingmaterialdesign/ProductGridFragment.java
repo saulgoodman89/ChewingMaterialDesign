@@ -1,22 +1,23 @@
 package com.aiden.chewingmaterialdesign;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.aiden.chewingmaterialdesign.network.ProductEntry;
+
+
 public class ProductGridFragment extends Fragment {
-    public ProductGridFragment() {
-        // Required empty public constructor
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -25,21 +26,25 @@ public class ProductGridFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(
+            @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment with the ProductGrid theme
         View view = inflater.inflate(R.layout.fragment_product_grid, container, false);
 
-        // Set up the toolbar
+        // Set up the tool bar
         setUpToolbar(view);
+
+        // Set up the RecyclerView
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2, RecyclerView.VERTICAL, false));
+        ProductCardRecyclerViewAdapter adapter = new ProductCardRecyclerViewAdapter(ProductEntry.initProductEntryList(getResources()));
+        recyclerView.setAdapter(adapter);
+        int largePadding = getResources().getDimensionPixelSize(R.dimen.shr_product_grid_spacing);
+        int smallPadding = getResources().getDimensionPixelSize(R.dimen.shr_product_grid_spacing_small);
+        recyclerView.addItemDecoration(new ProductGridItemDecoration(largePadding, smallPadding));
+
         return view;
-
-    }
-
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.shr_toolbar_menu,menu);
     }
 
     private void setUpToolbar(View view) {
@@ -49,4 +54,11 @@ public class ProductGridFragment extends Fragment {
             activity.setSupportActionBar(toolbar);
         }
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater menuInflater) {
+        menuInflater.inflate(R.menu.shr_toolbar_menu, menu);
+        super.onCreateOptionsMenu(menu, menuInflater);
+    }
+
 }

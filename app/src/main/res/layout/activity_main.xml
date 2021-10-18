@@ -6,8 +6,5 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:id="@+id/container">
-
-    <include
-        layout="@layout/shr_product_card" />
-
+    
 </FrameLayout>
